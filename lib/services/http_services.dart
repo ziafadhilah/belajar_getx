@@ -2,7 +2,7 @@
 
 import 'package:http/http.dart' as http;
 
-const urlBase = 'http://192.168.100.25:8000/api/note';
+const urlBase = 'http://192.168.0.108:8000/api/note';
 
 class Request {
   late final String url;
@@ -22,9 +22,7 @@ class Request {
   }
 
   Future<http.Response> patch() {
-    return http
-        .patch(Uri.parse(urlBase + url), body: body)
-        .timeout(Duration(minutes: 2));
+    return http.patch(Uri.parse(urlBase + url), body: body);
   }
 
   Future<http.Response> delete() {

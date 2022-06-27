@@ -4,12 +4,17 @@ import 'package:belajar_getx/views/edit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Index extends StatelessWidget {
-  Index({Key? key}) : super(key: key);
+class Index extends StatefulWidget {
+  const Index({Key? key}) : super(key: key);
 
+  @override
+  State<Index> createState() => _IndexState();
+}
+
+class _IndexState extends State<Index> {
   final DashboardController notesC = Get.put(DashboardController());
 
-  Future<void> _onEdit(int id, String title, description) async {
+  Future<void> _onEdit(int id, String title, String description) async {
     Get.to(Edit(
       title: title,
       description: description,
@@ -21,10 +26,21 @@ class Index extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NoteX'),
+        title: Text('NotesX'),
+        actions: [
+          Container(
+            padding: EdgeInsets.all(20.0),
+            child: Text('Jumlah Data : ${notesC.notes.length}'),
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(18.0),
@@ -86,67 +102,39 @@ class Index extends StatelessWidget {
     );
   }
 }
-
-// body: ListView.builder(
-      //   itemCount: notesC.notes.length,
-      //   itemBuilder: ((context, index) {
-      //     return Container(
-      //       padding: EdgeInsets.all(18.0),
-      //       child: SingleChildScrollView(
-      //         child: GestureDetector(
-      //           onTap: () {},
-      //           child: Card(
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.only(
-      //                 bottomRight: Radius.circular(
-      //                   30,
-      //                 ),
-      //               ),
-      //             ),
-      //             child: Container(
-      //               padding: EdgeInsets.all(10.0),
-      //               child: Column(
-      //                 mainAxisAlignment: MainAxisAlignment.start,
-      //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //                 children: [
-      //                   Row(
-      //                     children: [
-      //                       Text(
-      //                         "Title : ",
-      //                         style: TextStyle(fontSize: 20),
-      //                       ),
-      //                       Text(
-      //                         notesC.notes[index].title,
-      //                         style: TextStyle(
-      //                           color: Colors.blue,
-      //                           fontSize: 20,
-      //                         ),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                   Row(
-      //                     children: [
-      //                       Text(
-      //                         "Description : ",
-      //                         style: TextStyle(fontSize: 20),
-      //                       ),
-      //                       Flexible(
-      //                         flex: 1,
-      //                         child: Text(
-      //                           notesC.notes[index].description,
-      //                           maxLines: 1,
-      //                           overflow: TextOverflow.ellipsis,
-      //                           style: TextStyle(fontSize: 18),
-      //                         ),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ],
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     );
-      //   }),
-      // ),
+//                       ),
+//                       Text(
+//                         notesC.notes[index].title,
+//                         style: TextStyle(
+//                           color: Colors.blue,
+//                           fontSize: 20,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                   Row(
+//                     children: [
+//                       Text(
+//                         "Description : ",
+//                         style: TextStyle(fontSize: 20),
+//                       ),
+//                       Flexible(
+//                         flex: 1,
+//                         child: Text(
+//                           notesC.notes[index].description,
+//                           maxLines: 1,
+//                           overflow: TextOverflow.ellipsis,
+//                           style: TextStyle(fontSize: 18),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }),
+// ),

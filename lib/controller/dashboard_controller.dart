@@ -2,7 +2,6 @@
 import 'dart:convert';
 import 'package:belajar_getx/model/dashboard_model.dart';
 import 'package:belajar_getx/services/http_services.dart';
-import 'package:belajar_getx/views/edit.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -49,12 +48,11 @@ class DashboardController extends GetxController {
       if (value.statusCode == 200) {
         print(body["message"]);
         fetchDashboard();
-        titleController.clear();
-        descriptionController.clear();
+        addTitleController.clear();
+        addDescriptionController.clear();
         return Get.back();
       } else {
         print('Backend error');
-        // return Get.back();
       }
     });
   }
@@ -62,6 +60,7 @@ class DashboardController extends GetxController {
   void editNotes(int id) async {
     try {
       Request request = Request(url: '/$id', body: {
+        'id': id.toString(),
         'title': titleController.text,
         'description': descriptionController.text,
       });
@@ -79,7 +78,7 @@ class DashboardController extends GetxController {
         }
       });
     } catch (e) {
-      print("error ${e}");
+      print("error $e");
     }
   }
 
@@ -93,16 +92,14 @@ class DashboardController extends GetxController {
         if (value.statusCode == 200) {
           print(body["message"]);
           fetchDashboard();
-          titleController.clear();
-          descriptionController.clear();
-          return Get.back();
+          Get.toNamed('/index');
         } else {
           print(body);
           // return Get.back();
         }
       });
     } catch (e) {
-      print("error ${e}");
+      print("error $e");
     }
   }
 }

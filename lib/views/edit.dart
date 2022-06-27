@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Edit extends StatefulWidget {
-  final description, title;
+  // ignore: prefer_typing_uninitialized_variables
+  final title, description;
   const Edit({Key? key, this.description, this.title}) : super(key: key);
 
   @override
@@ -12,19 +13,17 @@ class Edit extends StatefulWidget {
 }
 
 class _EditState extends State<Edit> {
-  final DashboardController dashboardController =
-      Get.put(DashboardController());
+  final DashboardController notesC = Get.put(DashboardController());
 
-  _editNotes(int id) {
-    dashboardController.editNotes(id);
+  void _editNotes(int id) {
+    notesC.editNotes(id);
   }
 
   @override
   void initState() {
     super.initState();
-    dashboardController.titleController.text = widget.title.toString();
-    dashboardController.descriptionController.text =
-        widget.description.toString();
+    notesC.titleController.text = widget.title.toString();
+    notesC.descriptionController.text = widget.description.toString();
   }
 
   @override
@@ -45,7 +44,7 @@ class _EditState extends State<Edit> {
               height: 10,
             ),
             TextFormField(
-              controller: dashboardController.titleController,
+              controller: notesC.titleController,
               decoration: InputDecoration(
                 hintText: 'Title',
                 border: OutlineInputBorder(
@@ -75,7 +74,7 @@ class _EditState extends State<Edit> {
               height: 10,
             ),
             TextFormField(
-              controller: dashboardController.descriptionController,
+              controller: notesC.descriptionController,
               keyboardType: TextInputType.multiline,
               minLines: 5,
               maxLines: null,
@@ -109,7 +108,7 @@ class _EditState extends State<Edit> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                _editNotes(dashboardController.id.value);
+                _editNotes(notesC.id.value);
               },
             ),
           ],
